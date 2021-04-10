@@ -7,7 +7,7 @@
         - Courses
         - Sessions
         - Attendees
-    """
+    """,
     'author': 'Odoo',
     'website': 'https://www.odoo.com',
     'category': 'Training',
