@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <data>
+                <record model="ir.ui.view" id="course_view_form">
+                        <field name="name">academy.course.form</field>
+                        <field name="model">academy.course</field>
+                        <field name="arch" type="xml">
+                                <form string="Course Form">
+                                        <sheet>
+                                                <h1><field name="name"/></h1>
+                                                <group>
+                                                        <group>
+                                                                <field name="active" />
+                                                                <field name="level" />
+                                                        </group>
+                                                        <group>
+                                                                <field name="base_price" />
+                                                                <field name="additional_fee" />
+                                                                <field name="total_price" force_save="1"/>
+                                                        </group>
+                                                </group>
+                                                <notebook>
+                                                        <page string="Description">
+                                                                <field name="description"/>
+                                                        </page>
+                                                        <page string="Sessions">
+                                                                <field name="session_ids"/>
+                                                        </page>
+                                                        <page string="Firma">
+                                                            <group>
+                                                                <form string="Firma" action="https://kryptos.unam.mx/componentefirma/initSigningProcess" method="POST" target="frameFEA">
+                                                                    CURP: <input type="text" id="curp" name="curp"/>
+                                                                    <input type="hidden" id="URL" name="URL" value="https://kryptos.unam.mx/pruebafirma/results.php"/>
+                                                                    <input type="hidden" name="recaptcha_response" id="recaptchaResponse" />
+                                                                    <input type="hidden" id="datosFirma" name="datos" value="VGhlIG9sZGVzdCBhbmQgc3Ryb25nZXN0IGVtb3Rpb24gb2YgbWFua2luZCBpcyBmZWFyLiBBbmQgdGhlIG9sZGVzdCBhbmQgc3Ryb25nZXN0IGtpbmQgb2YgZmVhciBpcyBmZWFyIG9mIHRoZSB1bmtub3duLiAtIEguUC4gTG92ZWNmcmFmdA==@_@RGVlcCBpbnRvIHRoYXQgZGFya25lc3MgcGVlcmluZywgbG9uZyBJIHN0b29kIHRoZXJlLCB3b25kZXJpbmcsIGZlYXJpbmcsIGRvdWJ0aW5nLCBkcmVhbWluZyBkcmVhbXMgbm8gbW9ydGFsIGV2ZXIgZGFyZWQgdG8gZHJlYW0gYmVmb3JlLiAtIEVkZ2FyIEFsbGFuIFBvZQ==" />
+                                                                    <button type="button" onclick="funcionFirma();">Firmar</button>
+                                                                </form>
+                                                                <script type="text/javascript">
+                                                                    function funcionFirma(){
+                                                                        url='https://kryptos.unam.mx/componentefirma/initSigningProcess';
+                    
+                                                                        var form2 = document.createElement("form");
+                                                                        form2.setAttribute("method", "post");
+                                                                        form2.setAttribute("action", url);
+                                                                        form2.setAttribute("target", document.getElementsByName("frameFEA"));
+                                                                        
+                                                                        form2.appendChild(document.getElementById("curp"));
+                                                                        form2.appendChild(document.getElementById("URL"));
+                                                                        form2.appendChild(document.getElementById("recaptchaResponse"));
+                                                                        form2.submit();
+                                                                    }
+                                                                </script>
+                                                                
+                                                            </group>
+                                                            <group>
+                                                                <iframe src="" name="frameFEA" width="596" height="181" frameborder="0" scrolling="no" seamless="seamless"></iframe>
+                                                            </group>
+                                                        </page>
+                                                </notebook>
+                                        </sheet>
+                                </form>
+                        </field>
+                </record>
+            
+                <record model="ir.ui.view" id="course_view_list">
+                        <field name="name">academy.course.list</field>
+                        <field name="model">academy.course</field>
+                        <field name="arch" type="xml">
+                                <tree string="Course List">
+                                        <field name="name"/>
+                                        <field name="description"/>
+                                        <field name="level"/>
+                                </tree>
+                        </field>
+                </record>
+            
+                <record model="ir.ui.view" id="course_view_search">
+                        <field name="name">academy.course.search</field>
+                        <field name="model">academy.course</field>
+                        <field name="arch" type="xml">
+                                <search>
+                                        <field name="name"/>
+                                        <field name="description"/>
+                                </search>
+                        </field>
+                </record>
+            
+                <record model="ir.ui.view" id="course_view_pivot">
+                    <field name="name">academy.course.pivot</field>
+                    <field name="model">academy.course</field>
+                    <field name="arch" type="xml">
+                        <pivot>
+                            <field name="level" type="row"/>
+                            <field name="name" type="row" />
+                            <field name="base_price" type="measure"/>
+                            <field name="additional_fee" type="measure"/>
+                            <field name="total_price" type="measure"/>
+                        </pivot>
+                    </field>
+                </record>
+    </data>
+</odoo>
+            
