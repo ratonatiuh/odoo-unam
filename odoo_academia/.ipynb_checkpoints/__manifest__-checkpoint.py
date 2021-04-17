@@ -22,7 +22,8 @@
         'views/sale_views_inherit.xml',
         'views/product_views_inherit.xml',
         'demo/academy_demo.xml',
-        'wizard/sale_wizard_view.xml'
+        'wizard/sale_wizard_view.xml',
+        'report/session_report_templates.xml'
     ],
     'demo': [
         'demo/academy_demo.xml',
