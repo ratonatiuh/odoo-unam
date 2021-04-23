@@ -2,6 +2,8 @@
 
 from odoo import models, fields, api
 
+
+
 class SaleWizard(models.TransientModel):
     _name = 'academy.sale.wizard'
     _description = 'Wizard: Quick Sale Orders for Session Students'
@@ -22,7 +24,6 @@ class SaleWizard(models.TransientModel):
                                    string='Students for Sales Order')
     
     def create_sale_orders(self):
-        
         session_product_id = self.env['product.product'].search([('is_session_product','=',True)], limit=1)
         if session_product_id:
             for student in self.student_ids:
